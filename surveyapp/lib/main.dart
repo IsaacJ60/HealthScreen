@@ -1,7 +1,18 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart'; // Import the Firebase options file
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // Pass the Firebase options
+  );
+
   runApp(const MyApp());
 }
 
@@ -19,6 +30,11 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'Flutter Survey'),
     );
+  }
+
+  static void  writeToDB(dynamic data, dynamic name) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    await firestore.collection('first-survey').doc(name).set(data);
   }
 }
 
@@ -172,7 +188,21 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text("Validate"),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  //do something
+                  Map <String, dynamic> answers = {
+
+                  };
+
+                  for (QuestionResult q in _questionResults){
+                    while (q.children.isNotEmpty) {
+                      // print(q);
+                      answers[q.question] = q.answers;
+                      q = q.children[0];
+                    }
+                    answers[q.question] = q.answers;
+                  }
+                  // print(_questionResults[6]);
+                  print(answers);
+                  MyApp.writeToDB(answers, "alan");
                 }
               },
             ),
