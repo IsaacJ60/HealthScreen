@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1025877417545:android:fd153543833b451f392998",
+        "android_client_info": {
+          "package_name": "com.example.loginplz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025877417545-qai0drvb9b6tlqlaulqk68791lu32sm1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtQEP8mCzmkVIdvG2ZstvXq8ONWEtRRCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025877417545-qai0drvb9b6tlqlaulqk68791lu32sm1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1025877417545-7tdhf74p4fkgk2k4587nnp6vhk849spo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.surveyapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1025877417545:android:e7f15b54b7c275f5392998",
         "android_client_info": {
           "package_name": "com.example.surveyapp"
