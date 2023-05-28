@@ -6,7 +6,7 @@ import 'firebase_options.dart'; // Import the Firebase options file
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:surveyapp/database.dart';
-import 'package:surveyapp/login_screen.dart';
+import 'package:surveyapp/dashboard_ui.dart';
 
 class MyHomePage extends StatefulWidget {
   static const routeName = '/survey1'; 
@@ -195,6 +195,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   Database.writeToDB(answers, username); 
 
                   //GO TO DASHBOARD
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return DashboardUI( username: username);
+                  }));
                 }
               },
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:surveyapp/survey1.dart';
 import 'package:surveyapp/database.dart';
+import 'package:surveyapp/dashboard_ui.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -51,6 +52,7 @@ class LoginScreen extends StatelessWidget {
       if (foundName != true) {
         return 'User not exists';
       }
+      //send the guy an email
       return "hmm";
     });
   }
@@ -70,7 +72,7 @@ class LoginScreen extends StatelessWidget {
         }
         else{ //change to dashboard TO DO
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return MyHomePage(title: "random", username: name);
+            return DashboardUI( username: name);
           }));
         }
       },

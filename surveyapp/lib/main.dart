@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey/flutter_survey.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:surveyapp/dashboard_ui.dart';
 import 'firebase_options.dart'; // Import the Firebase options file
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:surveyapp/login_screen.dart';
+import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/survey1.dart';
 import 'package:surveyapp/transition_route_observer.dart';
 
@@ -36,7 +38,8 @@ class MainApp extends StatelessWidget {
       initialRoute: LoginScreen.routeName,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
-        MyHomePage.routeName: (context) => const MyHomePage(title: "Survey 1", username:"alan")
+        MyHomePage.routeName: (context) => const MyHomePage(title: "Survey 1", username:"alan"),
+        DashboardUI.routeName: (context) => DashboardUI(username: "alan")
       },
     );
   }
