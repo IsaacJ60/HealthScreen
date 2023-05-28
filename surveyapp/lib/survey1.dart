@@ -6,19 +6,39 @@ import 'firebase_options.dart'; // Import the Firebase options file
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:surveyapp/database.dart';
-import 'package:surveyapp/main.dart';
+import 'package:surveyapp/login_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   static const routeName = '/survey1'; 
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage(
+    {
+      super.key, 
+      required this.title, 
+      required this.username
+    }
+    );
 
   final String title;
+  final String username;
+
+  String getUsername(){
+    return username;
+  }
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late String username;
+  
+  @override
+  void initState() {
+    super.initState();
+    username = widget.username;
+  }
+
+  
   final _formKey = GlobalKey<FormState>();
   List<QuestionResult> _questionResults = [];
   final List<Question> _initialData = [
@@ -159,21 +179,22 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text("Validate"),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  Map <String, dynamic> answers = {
-
-                  };
+                  Map <String, dynamic> answers = {};
 
                   for (QuestionResult q in _questionResults){
                     while (q.children.isNotEmpty) {
-                      // print(q);
+                      
                       answers[q.question] = q.answers;
                       q = q.children[0];
                     }
                     answers[q.question] = q.answers;
                   }
-                  // print(_questionResults[6]);
-                  print(answers);
-                  Database.writeToDB(answers, "alan");
+                  print(username);
+                  //WEIRD
+                  Database.updateComplete(username);
+                  Database.writeToDB(answers, username); 
+
+                  //GO TO DASHBOARD
                 }
               },
             ),

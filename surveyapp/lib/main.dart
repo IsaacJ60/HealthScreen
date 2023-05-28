@@ -30,13 +30,13 @@ class MainApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Survey'),
+      // home: const MyHomePage(title: 'Flutter Survey'),
 
       navigatorObservers: [TransitionRouteObserver()],
       initialRoute: LoginScreen.routeName,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
-        MyHomePage.routeName: (context) => const MyHomePage(title: "Survey 1")
+        MyHomePage.routeName: (context) => const MyHomePage(title: "Survey 1", username:"alan")
       },
     );
   }

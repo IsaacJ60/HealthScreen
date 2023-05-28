@@ -13,6 +13,30 @@ class Database {
     );
   }
 
+  static Future<void> addUser(String? email, String? password) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+      await firestore.collection('users').doc(email).set({
+        'email': email,
+        "completed": false,
+        "password": password
+      });
+      print('User added to Firestore');
+    } catch (error) {
+      print('Error adding user to Firestore: $error');
+    }
+  }
+
+  static Future<void> updateComplete(String? email) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+      await firestore.collection('users').doc(email).update({
+        "completed": true
+      });
+    } catch (error) {
+    }
+  }
+
   static Future<bool?> validateUser(String email, String password) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     QuerySnapshot querySnapshot = await firestore.collection('users').get();
@@ -25,6 +49,7 @@ class Database {
         return true;
       }
     }
+    return false;
   }
 
   static Future<bool?> findUser(String email) async {
@@ -41,8 +66,25 @@ class Database {
     return false;
   }
 
+  static Future<bool?> userCompleted(String email) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    QuerySnapshot querySnapshot = await firestore.collection('users').get();
+    List<QueryDocumentSnapshot> documents = querySnapshot.docs;
+    for (var document in documents) {
+      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      
+      if (data["email"] == email){
+        return data["completed"];
+      }
+    }
+    return false;
+  }
+
+
   static void writeToDB(dynamic data, dynamic name) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     await firestore.collection('first-survey').doc(name).set(data);
   }
+
+
 }
