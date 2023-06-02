@@ -16,12 +16,12 @@ class LoginScreen extends StatelessWidget {
 
     name = data.name;
 
-    return Future.delayed(loginTime).then((_) async{
+    return Future.delayed(loginTime).then((_) async {
       bool? foundName = await Database.findUser(data.name);
       bool? validate = await Database.validateUser(data.name, data.password);
       bool? comp = await Database.userCompleted(data.name);
 
-      if (comp == true){
+      if (comp == true) {
         completed = true;
       }
 
@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
 
   Future<String> _recoverPassword(String name) {
     debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) async{
+    return Future.delayed(loginTime).then((_) async {
       bool? foundName = await Database.findUser(name);
       if (foundName != true) {
         return 'User not exists';
@@ -65,14 +65,14 @@ class LoginScreen extends StatelessWidget {
       onSignup: _signupUser,
       onRecoverPassword: _recoverPassword,
       onSubmitAnimationCompleted: () {
-        if (!completed){
+        if (!completed) {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return MyApp(title: "random", username: name);
           }));
-        }
-        else{ //change to dashboard TO DO
+        } else {
+          //change to dashboard TO DO
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return DashboardUI( username: name);
+            return DashboardUI(username: name);
           }));
         }
       },

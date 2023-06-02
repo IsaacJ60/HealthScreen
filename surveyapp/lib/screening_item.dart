@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'screening_data.dart';
 
 class ScreeningItem extends StatelessWidget {
-  final ScreeningItemData item;
+  final ScreeningData item;
 
   const ScreeningItem({required this.item});
 
