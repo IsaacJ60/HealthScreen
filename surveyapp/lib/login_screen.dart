@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
       onSubmitAnimationCompleted: () {
         if (!completed){
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return MyHomePage(title: "random", username: name);
+            return MyApp(title: "random", username: name);
           }));
         }
         else{ //change to dashboard TO DO

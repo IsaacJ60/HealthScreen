@@ -38,7 +38,7 @@ class MainApp extends StatelessWidget {
       initialRoute: LoginScreen.routeName,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
-        MyHomePage.routeName: (context) => const MyHomePage(title: "Survey 1", username:"alan"),
+        MyApp.routeName: (context) => const MyApp(title: "Survey 1", username:"alan"),
         DashboardUI.routeName: (context) => DashboardUI(username: "alan")
       },
     );

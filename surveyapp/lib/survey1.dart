@@ -1,35 +1,30 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_survey/flutter_survey.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // Import the Firebase options file
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:surveyapp/database.dart';
+import 'package:survey_kit/survey_kit.dart';
 import 'package:surveyapp/dashboard_ui.dart';
+import 'package:surveyapp/database.dart';
 
-class MyHomePage extends StatefulWidget {
-  static const routeName = '/survey1'; 
-  const MyHomePage(
-    {
-      super.key, 
-      required this.title, 
-      required this.username
-    }
-    );
+class MyApp extends StatefulWidget {
+  static const routeName = '/survey1';
+  const MyApp(
+  {
+    super.key, 
+    required this.title, 
+    required this.username
+  }
+  );
 
   final String title;
   final String username;
-
-  String getUsername(){
-    return username;
-  }
+  
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyAppState extends State<MyApp> {
   late String username;
   
   @override
@@ -38,172 +33,210 @@ class _MyHomePageState extends State<MyHomePage> {
     username = widget.username;
   }
 
-  
-  final _formKey = GlobalKey<FormState>();
-  List<QuestionResult> _questionResults = [];
-  final List<Question> _initialData = [
-    Question(
-      question: "How old are you?",
-      isMandatory: true,
-    ),
-    Question(
-      question: "What height are you?",
-      isMandatory: true,
-    ),
-    Question(
-      question: "What is your sex?",
-      isMandatory: true,
-      answerChoices: const {
-        "Male": null,
-        "Female": null,
-        "Other": null,
-      },
-    ),
-    Question(
-      question: "What weight group do you belong in?",
-      isMandatory: true,
-      answerChoices: const {
-        "Weight 1": null,
-        "Weight 2": null,
-        "OBESE": null,
-      },
-    ),
-    Question(
-      question: "Are you sexually active?",
-      isMandatory: true,
-      answerChoices: const {
-        "Yes": null,
-        "No": null,
-      },
-    ),
-    Question(
-      question: "How often do you smoke?",
-      isMandatory: true,
-      answerChoices: const {
-        "Often": null,
-        "Sometimes": null,
-        "Almost Never": null,
-        "Never": null,
-      },
-    ),
-    Question(
-      isMandatory: true,
-      question: 'Do you like drinking coffee?',
-      answerChoices: {
-        "Yes": [
-          Question(
-              singleChoice: false,
-              question: "What are the brands that you've tried?",
-              answerChoices: {
-                "Nestle": null,
-                "Starbucks": null,
-                "Coffee Day": [
-                  Question(
-                    question: "Did you enjoy visiting Coffee Day?",
-                    isMandatory: true,
-                    answerChoices: {
-                      "Yes": [
-                        Question(
-                          question: "Please tell us why you like it",
-                        )
-                      ],
-                      "No": [
-                        Question(
-                          question: "Please tell us what went wrong",
-                        )
-                      ],
-                    },
-                  )
-                ],
-              })
-        ],
-        "No": [
-          Question(
-            question: "Do you like drinking Tea then?",
-            answerChoices: {
-              "Yes": [
-                Question(
-                    question: "What are the brands that you've tried?",
-                    answerChoices: {
-                      "Nestle": null,
-                      "ChaiBucks": null,
-                      "Indian Premium Tea": [
-                        Question(
-                          question: "Did you enjoy visiting IPT?",
-                          answerChoices: {
-                            "Yes": [
-                              Question(
-                                question: "Please tell us why you like it",
-                              )
-                            ],
-                            "No": [
-                              Question(
-                                question: "Please tell us what went wrong",
-                              )
-                            ],
-                          },
-                        )
-                      ],
-                    })
-              ],
-              "No": null,
-            },
-          )
-        ],
-      },
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Survey(
-            onNext: (questionResults) {
-              _questionResults = questionResults;
-            },
-            initialData: _initialData),
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: 56,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.cyanAccent, // Background Color
-              ),
-              child: const Text("Validate"),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Map <String, dynamic> answers = {};
+    return MaterialApp(
+      // THINGY THAT CONTAINS AND DRAWS THE SURVEY
+      home: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: Align(
+            alignment: Alignment.center,
+            child: FutureBuilder<Task>(
+              future: initialSurvey(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData &&
+                    snapshot.data != null) {
+                  final task = snapshot.data!;
+                  return SurveyKit(
+                    onResult: (SurveyResult result) {
+                      // USER FINISHES THE QUIZ
+                      print(result.finishReason);
+                      final jsonResult = result.toJson();
+                      // print the json-formatted results
 
-                  for (QuestionResult q in _questionResults){
-                    while (q.children.isNotEmpty) {
-                      
-                      answers[q.question] = q.answers;
-                      q = q.children[0];
-                    }
-                    answers[q.question] = q.answers;
-                  }
-                  print(username);
-                  //WEIRD
-                  Database.updateComplete(username);
-                  Database.writeToDB(answers, username); 
+                      var questions = [
+                        "",
+                        "How old are you?",
+                        "What is your sex?"
+                      ];
 
-                  //GO TO DASHBOARD
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return DashboardUI( username: username);
-                  }));
+                      Map <String, dynamic> data = {};
+
+                      for (var i=1; i<questions.length; i++){
+                        debugPrint(questions[i] + " " + jsonResult["results"][i]["results"][0]["valueIdentifier"].toString());
+                        data[questions[i]] = jsonResult["results"][i]["results"][0]["valueIdentifier"].toString();
+                      }
+
+                      Database.updateComplete(username);
+                      Database.writeToDB(data, username);
+
+                      //GO TO DASHBOARD
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return DashboardUI( username: username);
+                      }));
+                    },
+                    task: task,
+                    showProgress: true,
+                    localizations: const {
+                      'cancel': 'Cancel',
+                      'next': 'Next',
+                    },
+                    themeData: Theme.of(context).copyWith(
+                      primaryColor: Colors.cyan,
+                      appBarTheme: const AppBarTheme(
+                        color: Colors.white,
+                        iconTheme: IconThemeData(
+                          color: Colors.cyan,
+                        ),
+                        titleTextStyle: TextStyle(
+                          color: Colors.cyan,
+                        ),
+                      ),
+                      iconTheme: const IconThemeData(
+                        color: Colors.cyan,
+                      ),
+                      textSelectionTheme: const TextSelectionThemeData(
+                        cursorColor: Colors.cyan,
+                        selectionColor: Colors.cyan,
+                        selectionHandleColor: Colors.cyan,
+                      ),
+                      cupertinoOverrideTheme: const CupertinoThemeData(
+                        primaryColor: Colors.cyan,
+                      ),
+                      outlinedButtonTheme: OutlinedButtonThemeData(
+                        style: ButtonStyle(
+                          minimumSize: MaterialStateProperty.all(
+                            const Size(150.0, 60.0),
+                          ),
+                          side: MaterialStateProperty.resolveWith(
+                            (Set<MaterialState> state) {
+                              if (state.contains(MaterialState.disabled)) {
+                                return const BorderSide(
+                                  color: Colors.grey,
+                                );
+                              }
+                              return const BorderSide(
+                                color: Colors.cyan,
+                              );
+                            },
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          textStyle: MaterialStateProperty.resolveWith(
+                            (Set<MaterialState> state) {
+                              if (state.contains(MaterialState.disabled)) {
+                                return Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                      color: Colors.grey,
+                                    );
+                              }
+                              return Theme.of(context)
+                                  .textTheme
+                                  .labelLarge
+                                  ?.copyWith(
+                                    color: Colors.cyan,
+                                  );
+                            },
+                          ),
+                        ),
+                      ),
+                      textButtonTheme: TextButtonThemeData(
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(
+                            Theme.of(context).textTheme.labelLarge?.copyWith(
+                                  color: Colors.cyan,
+                                ),
+                          ),
+                        ),
+                      ),
+                      textTheme: const TextTheme(
+                        displayMedium: TextStyle(
+                          fontSize: 28.0,
+                          color: Colors.black,
+                        ),
+                        headlineSmall: TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.black,
+                        ),
+                        bodyMedium: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                        titleMedium: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                      inputDecorationTheme: const InputDecorationTheme(
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      colorScheme: ColorScheme.fromSwatch(
+                        primarySwatch: Colors.cyan,
+                      )
+                          .copyWith(
+                            onPrimary: Colors.white,
+                          )
+                          .copyWith(background: Colors.white),
+                    ),
+                    surveyProgressbarConfiguration: SurveyProgressConfiguration(
+                      backgroundColor: Colors.white,
+                    ),
+                  );
                 }
+                return const CircularProgressIndicator.adaptive();
               },
             ),
           ),
-        ],
+        ),
       ),
     );
+  }
+
+  // THE SURVEY TO BE DISPLAYED
+  Future<Task> initialSurvey() {
+    var surveyQuestions = NavigableTask(
+      id: TaskIdentifier(),
+      steps: [
+        InstructionStep(
+          title: 'Welcome to HealthScreen',
+          text: 'Please answer all questions to the best of your ability.',
+          buttonText: 'Let\'s go!',
+        ),
+        QuestionStep(
+          title: 'How old are you?',
+          answerFormat: const IntegerAnswerFormat(
+            hint: 'Please enter your age',
+          ),
+          isOptional: false,
+        ),
+        QuestionStep(
+          title: 'What is your sex?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Male', value: 'Male'),
+              TextChoice(text: 'Female', value: 'Female'),
+              TextChoice(text: 'Other', value: 'Other'),
+            ],
+            defaultSelection: TextChoice(text: 'Other', value: 'Other'),
+          ),
+        ),
+        CompletionStep(
+          stepIdentifier: StepIdentifier(id: '321'),
+          text: 'Thanks for answering',
+          title: 'Done!',
+          buttonText: 'Submit survey',
+        ),
+      ],
+    );
+    return Future.value(surveyQuestions);
   }
 }
