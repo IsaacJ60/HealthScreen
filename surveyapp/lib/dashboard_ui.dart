@@ -36,13 +36,14 @@ class _DashboardUIState extends State<DashboardUI> {
           child: Text(username),
         ),
         leading: const Icon(Icons.account_circle_rounded),
+        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 16),
             const Text(
-              'Future Screening',
+              'Recommended/Future Screening',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

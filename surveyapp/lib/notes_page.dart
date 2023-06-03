@@ -13,6 +13,7 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
   List<String> notes = [];
+
   TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -41,6 +42,7 @@ class _NotesPageState extends State<NotesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.item.name),
+        backgroundColor: widget.item.color,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
