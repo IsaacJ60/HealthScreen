@@ -3,14 +3,9 @@ import 'screening_data.dart';
 import 'screening_item.dart';
 
 class DashboardUI extends StatefulWidget {
-  static const routeName = "/dash"; 
+  static const routeName = "/dash";
 
-  const DashboardUI(
-    {
-      super.key, 
-      required this.username
-    }
-  );
+  const DashboardUI({super.key, required this.username});
 
   final String username;
 
@@ -21,7 +16,6 @@ class DashboardUI extends StatefulWidget {
 class _DashboardUIState extends State<DashboardUI> {
   late String username;
   int _currentIndex = 0;
-
   @override
   void initState() {
     super.initState();
@@ -38,84 +32,61 @@ class _DashboardUIState extends State<DashboardUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.account_circle_rounded),
         title: Center(
           child: Text(username),
         ),
+        leading: const Icon(Icons.account_circle_rounded),
+        backgroundColor: Colors.blue,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 24),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Future Screenings',
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 16),
+            const Text(
+              'Recommended/Future Screening',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-          SizedBox(height: 24),
-          Container(
-            height: 200,
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              scrollDirection: Axis.horizontal,
-              itemCount: ScreeningData.futureItems.length,
-              separatorBuilder: (context, _) => SizedBox(width: 12),
-              itemBuilder: (context, index) =>
-                  ScreeningItem(item: ScreeningData.futureItems[index]),
+            const SizedBox(height: 16),
+            Container(
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: ScreeningItemsData.futureItems.length,
+                itemBuilder: (context, index) {
+                  final item = ScreeningItemsData.futureItems[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ScreeningItem(item: item),
+                  );
+                },
+              ),
             ),
-          ),
-          SizedBox(height: 24),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Completed Screenings',
+            const SizedBox(height: 32),
+            const Text(
+              'Completed Screening',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-          SizedBox(height: 12),
-          Expanded(
-  child: Container(
-    padding: EdgeInsets.symmetric(horizontal: 16),
-    child: SingleChildScrollView(
-      child: Column(
-        children: [
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: ScreeningData.completedItems.length,
-            separatorBuilder: (context, _) => SizedBox(height: 12),
-            itemBuilder: (context, index) =>
-                ScreeningItem(item: ScreeningData.completedItems[index]),
-          ),
-        ],
-      ),
-    ),
-  ),
-),
-        ],
-      ),
-     
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabSelected,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.insert_chart),
-            label: 'Insights',
-          ),
-        ],
+            SizedBox(height: 16),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: ScreeningItemsData.completedItems.length,
+              itemBuilder: (context, index) {
+                final item = ScreeningItemsData.completedItems[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ScreeningItem(item: item),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

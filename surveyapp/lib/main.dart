@@ -14,7 +14,8 @@ import 'package:surveyapp/transition_route_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform, // Pass the Firebase options
+    options:
+        DefaultFirebaseOptions.currentPlatform, // Pass the Firebase options
   );
 
   runApp(const MainApp());
@@ -38,10 +39,10 @@ class MainApp extends StatelessWidget {
       initialRoute: LoginScreen.routeName,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
-        MyApp.routeName: (context) => const MyApp(title: "Survey 1", username:"alan"),
+        MyApp.routeName: (context) =>
+            const MyApp(title: "Survey 1", username: "alan"),
         DashboardUI.routeName: (context) => DashboardUI(username: "alan")
       },
     );
   }
 }
-
