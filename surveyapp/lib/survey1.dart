@@ -2,23 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_survey/flutter_survey.dart';
 import 'package:survey_kit/survey_kit.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/database.dart';
 
 class MyApp extends StatefulWidget {
   static const routeName = '/survey1';
-  const MyApp(
-  {
-    super.key, 
-    required this.title, 
-    required this.username
-  }
-  );
+  const MyApp({super.key, required this.title, required this.username});
 
   final String title;
   final String username;
-  
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -26,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late String username;
-  
+
   @override
   void initState() {
     super.initState();
@@ -62,19 +56,26 @@ class _MyAppState extends State<MyApp> {
                         "What is your sex?"
                       ];
 
-                      Map <String, dynamic> data = {};
+                      Map<String, dynamic> data = {};
 
-                      for (var i=1; i<questions.length; i++){
-                        debugPrint(questions[i] + " " + jsonResult["results"][i]["results"][0]["valueIdentifier"].toString());
-                        data[questions[i]] = jsonResult["results"][i]["results"][0]["valueIdentifier"].toString();
+                      for (var i = 1; i < questions.length; i++) {
+                        debugPrint(questions[i] +
+                            " " +
+                            jsonResult["results"][i]["results"][0]
+                                    ["valueIdentifier"]
+                                .toString());
+                        data[questions[i]] = jsonResult["results"][i]["results"]
+                                [0]["valueIdentifier"]
+                            .toString();
                       }
 
                       Database.updateComplete(username);
                       Database.writeToDB(data, username);
 
                       //GO TO DASHBOARD
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return DashboardUI( username: username);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return DashboardUI(username: username);
                       }));
                     },
                     task: task,
@@ -226,7 +227,92 @@ class _MyAppState extends State<MyApp> {
               TextChoice(text: 'Female', value: 'Female'),
               TextChoice(text: 'Other', value: 'Other'),
             ],
-            defaultSelection: TextChoice(text: 'Other', value: 'Other'),
+          ),
+        ),
+        QuestionStep(
+          title: 'What is your height (meters)?',
+          answerFormat: const DoubleAnswerFormat(
+            hint: 'Height in Meters',
+          ),
+        ),
+        QuestionStep(
+          title: 'What is your weight (kilograms)?',
+          answerFormat: const DoubleAnswerFormat(
+            hint: 'Weight in Kilograms',
+          ),
+        ),
+        QuestionStep(
+          title: 'Are you sexually active?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'Do you currently smoke?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'Do you have a family history of colon cancer?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+              TextChoice(text: 'I don\'t know', value: 'I don\'t know'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title:
+              'If you answered yes to the previous question, please enter the age that family member was diagnosed with colon cancer.',
+          isOptional: true,
+          answerFormat: const IntegerAnswerFormat(
+            hint: 'Skip if this does not apply to you.',
+          ),
+        ),
+        QuestionStep(
+          title: 'Do you have a family history of colon cancer?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+              TextChoice(text: 'I don\'t know', value: 'I don\'t know'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'Do you have a personal history of fractures?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+              TextChoice(text: 'I don\'t know', value: 'I don\'t know'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'Are you premenopausal or postmenopausal?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Premenopausal', value: 'Premenopausal'),
+              TextChoice(text: 'Postmenopausal', value: 'Postmenopausal'),
+              TextChoice(text: "I don't know", value: "I don't know"),
+              TextChoice(text: "I'm a male", value: "I'm a male"),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'If you are postmenopausal, what was your age of menopause?',
+          isOptional: true,
+          answerFormat: const IntegerAnswerFormat(
+            hint: 'Skip if this does not apply to you.',
           ),
         ),
         CompletionStep(
