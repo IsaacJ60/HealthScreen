@@ -7,18 +7,18 @@ import 'package:survey_kit/survey_kit.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/database.dart';
 
-class MyApp extends StatefulWidget {
-  static const routeName = '/survey1';
-  const MyApp({super.key, required this.title, required this.username});
+class InitialSurvey extends StatefulWidget {
+  static const routeName = '/initial_survey';
+  const InitialSurvey({super.key, required this.title, required this.username});
 
   final String title;
   final String username;
 
   @override
-  _MyAppState createState() => _MyAppState();
+  _InitialSurveyState createState() => _InitialSurveyState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _InitialSurveyState extends State<InitialSurvey> {
   late String username;
 
   @override
@@ -247,6 +247,18 @@ class _MyAppState extends State<MyApp> {
             textChoices: [
               TextChoice(text: 'Yes', value: 'Yes'),
               TextChoice(text: 'No', value: 'No'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title:
+              'If you are sexually active, does your partner have an STI or history of STIs?',
+          isOptional: true,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+              TextChoice(text: 'I don\'t know', value: 'I don\'t know'),
             ],
           ),
         ),

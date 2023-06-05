@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:surveyapp/login_screen.dart';
 import 'package:surveyapp/dashboard_ui.dart';
-import 'package:surveyapp/survey1.dart';
+import 'package:surveyapp/initial_survey.dart';
 import 'package:surveyapp/transition_route_observer.dart';
 
 void main() async {
@@ -30,7 +30,8 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Survey Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 40, 144, 255)),
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Survey'),
@@ -39,9 +40,9 @@ class MainApp extends StatelessWidget {
       initialRoute: LoginScreen.routeName,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
-        MyApp.routeName: (context) =>
-            const MyApp(title: "Survey 1", username: "alan"),
-        DashboardUI.routeName: (context) => DashboardUI(username: "alan")
+        InitialSurvey.routeName: (context) =>
+            const InitialSurvey(title: "Survey 1", username: "alan"),
+        DashboardUI.routeName: (context) => const DashboardUI(username: "alan")
       },
     );
   }

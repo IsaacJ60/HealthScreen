@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:surveyapp/survey1.dart';
+import 'package:surveyapp/initial_survey.dart';
 import 'package:surveyapp/database.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
       onSubmitAnimationCompleted: () {
         if (!completed) {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return MyApp(title: "random", username: name);
+            return InitialSurvey(title: "random", username: name);
           }));
         } else {
           //change to dashboard TO DO
