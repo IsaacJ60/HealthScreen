@@ -3,6 +3,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:surveyapp/initial_survey.dart';
 import 'package:surveyapp/database.dart';
 import 'package:surveyapp/dashboard_ui.dart';
+import 'package:surveyapp/email_sender.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -52,8 +53,11 @@ class LoginScreen extends StatelessWidget {
       if (foundName != true) {
         return 'User not exists';
       }
-      //send the guy an email
-      return "hmm";
+      bool emailSent = sendEmailInBackground(name, "Insert the password here") as bool;
+      if (emailSent) {
+        return "Email sent";
+      }
+      return "Email failed to send";
     });
   }
 
