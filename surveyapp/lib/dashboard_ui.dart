@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'screening_data.dart';
 import 'screening_item.dart';
+import 'insights_page.dart';
 
 class DashboardUI extends StatefulWidget {
   static const routeName = "/dash";
 
-  const DashboardUI({super.key, required this.username});
+  const DashboardUI({Key? key, required this.username}) : super(key: key);
 
   final String username;
 
@@ -16,6 +17,7 @@ class DashboardUI extends StatefulWidget {
 class _DashboardUIState extends State<DashboardUI> {
   late String username;
   int _currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -23,9 +25,13 @@ class _DashboardUIState extends State<DashboardUI> {
   }
 
   void _onTabSelected(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    if (index == 1) {
+      Navigator.pushNamed(context, InsightsPage.routeName);
+    } else {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
   }
 
   @override
@@ -87,6 +93,20 @@ class _DashboardUIState extends State<DashboardUI> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onTabSelected,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart),
+            label: 'Insights',
+          ),
+        ],
       ),
     );
   }

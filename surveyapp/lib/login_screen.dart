@@ -53,7 +53,8 @@ class LoginScreen extends StatelessWidget {
       if (foundName != true) {
         return 'User not exists';
       }
-      bool emailSent = sendEmailInBackground(name, "Insert the password here") as bool;
+      bool emailSent =
+          sendEmailInBackground(name, "Insert the password here") as bool;
       if (emailSent) {
         return "Email sent";
       }
