@@ -7,7 +7,7 @@ import 'firebase_options.dart'; // Import the Firebase options file
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:surveyapp/login_screen.dart';
-import 'package:surveyapp/dashboard_ui.dart';
+import 'package:surveyapp/database.dart';
 import 'package:surveyapp/initial_survey.dart';
 import 'package:surveyapp/transition_route_observer.dart';
 
@@ -41,7 +41,7 @@ class MainApp extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
         InitialSurvey.routeName: (context) =>
-            const InitialSurvey(title: "Survey 1", username: "alan"),
+        const InitialSurvey(title: "Survey 1", username: "alan"),
         DashboardUI.routeName: (context) => const DashboardUI(username: "alan")
       },
     );

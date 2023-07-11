@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screening_data.dart';
 import 'screening_item.dart';
+import 'database.dart';
 
 class DashboardUI extends StatefulWidget {
   static const routeName = "/dash";
@@ -59,7 +60,7 @@ class _DashboardUIState extends State<DashboardUI> {
                   final item = ScreeningItemsData.futureItems[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ScreeningItem(item: item),
+                    child: ScreeningItem(item: item!, username: username),
                   );
                 },
               ),
@@ -81,7 +82,7 @@ class _DashboardUIState extends State<DashboardUI> {
                 final item = ScreeningItemsData.completedItems[index];
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ScreeningItem(item: item),
+                  child: ScreeningItem(item: item!, username: username),
                 );
               },
             ),

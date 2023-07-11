@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'screening_data.dart';
-import 'screening_item.dart';
+import 'database.dart';
 
 class NotesPage extends StatefulWidget {
   final ScreeningData item;
 
-  NotesPage({required this.item});
+  NotesPage({required this.item, required this.username});
+  
+  final String username;
 
   @override
   _NotesPageState createState() => _NotesPageState();
@@ -13,17 +15,24 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
   List<String> notes = [];
+  late ScreeningData item;
+  late String username;
 
   TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    item = widget.item;
     notes = widget.item.notes.toList();
+    username = widget.username;
   }
 
   void addNote() {
     if (_textEditingController.text.isNotEmpty) {
+      print(item.name);
+      print(username+' '+ item.name+' '+ _textEditingController.text);
+      Database.addNotes(username, item.name, _textEditingController.text);
       setState(() {
         notes.add(_textEditingController.text);
         _textEditingController.clear();
@@ -32,6 +41,10 @@ class _NotesPageState extends State<NotesPage> {
   }
 
   void deleteNote(int index) {
+    print(item.name);
+    print(notes[index]);
+
+    Database.deleteNote(username, item.name, notes[index]);
     setState(() {
       notes.removeAt(index);
     });
