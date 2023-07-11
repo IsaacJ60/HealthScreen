@@ -259,7 +259,7 @@ class Database {
   }
 
   static List<String> getFutureScreenings(Map<String, dynamic> response){
-    List<String> ret;
+    List<String> ret = [];
 
     if (response['What is your sex?'] == 'Female'){
       int age = response['How old are you?'];
