@@ -45,7 +45,7 @@ class MainApp extends StatelessWidget {
         InitialSurvey.routeName: (context) =>
             const InitialSurvey(title: "Survey 1", username: "alan"),
         DashboardUI.routeName: (context) => const DashboardUI(username: "alan"),
-        InsightsPage.routeName: (context) => InsightsPage(),
+        "/insights": (context) => InsightsPage(),
       },
     );
   }
