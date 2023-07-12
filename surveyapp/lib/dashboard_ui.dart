@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screening_data.dart';
 import 'screening_item.dart';
 import 'insights_page.dart';
+import 'insights_card.dart';
 
 class DashboardUI extends StatefulWidget {
   static const routeName = "/dash";
@@ -26,7 +27,12 @@ class _DashboardUIState extends State<DashboardUI> {
 
   void _onTabSelected(int index) {
     if (index == 1) {
-      Navigator.pushNamed(context, InsightsPage.routeName);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => InsightsPage(),
+        ),
+      );
     } else {
       setState(() {
         _currentIndex = index;

@@ -4,29 +4,26 @@ import 'package:flutter_survey/flutter_survey.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/insights_page.dart';
-import 'firebase_options.dart'; // Import the Firebase options file
+import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:surveyapp/login_screen.dart';
-import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/initial_survey.dart';
 import 'package:surveyapp/transition_route_observer.dart';
-import 'package:surveyapp/insights_page.dart';
+import 'package:surveyapp/insights_item.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options:
-        DefaultFirebaseOptions.currentPlatform, // Pass the Firebase options
+    options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  // InsightItemsData.loadArticleText();
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

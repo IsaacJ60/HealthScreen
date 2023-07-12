@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'screening_data.dart';
-import 'screening_item.dart';
 
 class NotesPage extends StatefulWidget {
   final ScreeningData item;

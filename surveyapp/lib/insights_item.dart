@@ -1,34 +1,77 @@
 import 'package:flutter/material.dart';
+import 'insights_item.dart';
+
+//import 'package:universal_html/html.dart' as html;
 
 class InsightItem {
   final String name;
-  final IconData iconData;
-  final Color color;
+  final String imagePath;
+  final int headerID;
+  final String articleText;
+  final List<String> gifPaths;
+  // each box should have a list of gif paths and a txt.file
+  //read txt.file and create a article text list
+  // txt.file should
 
-  InsightItem({required this.name, required this.iconData, required this.color});
+  InsightItem(
+      {required this.name,
+      required this.imagePath,
+      required this.headerID,
+      required this.articleText,
+      required this.gifPaths});
 }
 
 class InsightItemsData {
   static List<InsightItem> items = [
     InsightItem(
-      name: 'Box 1',
-      iconData: Icons.insert_chart,
-      color: Colors.blue,
+      name: 'Case study in alabama',
+      imagePath: 'assets/boxCover.jpg',
+      headerID: 1,
+      articleText: 'djslkfjdlfjlkjsklfjf',
+      gifPaths: ["assets/download.gif"],
     ),
     InsightItem(
-      name: 'Box 2',
-      iconData: Icons.pie_chart,
-      color: Colors.green,
+      name: 'Case study in mexico',
+      imagePath: 'assets/boxCover2.jpeg',
+      headerID: 2,
+      articleText: 'djslkfjdlfjlkjsklfjf',
+      gifPaths: ["assets/download.gif"],
     ),
     InsightItem(
-      name: 'Box 3',
-      iconData: Icons.bar_chart,
-      color: Colors.orange,
+      name: 'hmmm',
+      imagePath: 'assets/boxCover3.jpeg',
+      headerID: 3,
+      articleText: 'djslkfjdlfjlkjsklfjf',
+      gifPaths: ["assets/download.gif"],
     ),
     InsightItem(
-      name: 'Box 4',
-      iconData: Icons.show_chart,
-      color: Colors.red,
-    ),
+      name: 'bruh',
+      imagePath: 'assets/boxCover3.jpeg',
+      headerID: 3,
+      articleText: 'djslkfjdlfjlkjsklfjf',
+      gifPaths: ["assets/download.gif"],
+    )
   ];
+  /*
+  static void loadArticleText() {
+    for (var item in items) {
+      String filePath = 'txt_files/article.txt';
+
+      html.HttpRequest.request(filePath).then((request) {
+        var response = request.response;
+        if (response is html.Blob) {
+          final reader = html.FileReader();
+          reader.readAsText(response);
+          reader.onLoadEnd.listen((event) {
+            item.articleText = reader.result.toString();
+          });
+        } else {
+          print('Invalid response type');
+        }
+      }).catchError((error) {
+        print('Error loading text: $error');
+      });
+    }
+  }
+  */
 }
