@@ -11,7 +11,7 @@ Future<bool> sendEmailInBackground(String email, String password) async {
 
   final requestBody = {
     'apikey': apiKey,
-    'from': 'jacob.gaisinsky@gmail.com', // Replace with sender email
+    'from': 'jacob.gaisinsky@gmail.com', // TODO: Replace with sender email
     'subject': 'Health Screening Password Recovery',
     'to': email,
     'bodyHtml': 'Your password is $password.',

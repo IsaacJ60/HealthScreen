@@ -4,6 +4,7 @@ import 'package:flutter_survey/flutter_survey.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/insights_page.dart';
+import 'package:surveyapp/profile_page.dart';
 import 'firebase_options.dart'; // Import the Firebase options file
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -46,6 +47,7 @@ class MainApp extends StatelessWidget {
             const InitialSurvey(title: "Survey 1", username: "alan"),
         DashboardUI.routeName: (context) => const DashboardUI(username: "alan"),
         InsightsPage.routeName: (context) => InsightsPage(),
+        ProfilePage.routeName: (context) => ProfilePage(username: "alan"),
       },
     );
   }

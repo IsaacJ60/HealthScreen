@@ -31,6 +31,27 @@ class Database {
     }
   }
 
+  static Future<void> deleteUser(String email) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    try {
+      // Delete user document from the 'users' collection
+      await firestore.collection('users').doc(email).delete();
+
+      await firestore.collection('first-survey').doc(email).delete();
+
+      // Delete futureScreenings document associated with the user
+      await firestore.collection('futureScreenings').doc(email).delete();
+
+      // Delete completedScreenings document associated with the user
+      await firestore.collection('completedScreenings').doc(email).delete();
+
+      print('$email deleted from Firestore');
+    } catch (error) {
+      print('Error deleting $email from Firestore: $error');
+    }
+  }
+
   static Future<void> updateComplete(String? email) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     try {

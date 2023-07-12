@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:surveyapp/profile_page.dart';
 import 'screening_data.dart';
 import 'screening_item.dart';
 import 'database.dart';
@@ -42,7 +43,14 @@ class _DashboardUIState extends State<DashboardUI> {
         title: Center(
           child: Text(username),
         ),
-        leading: const Icon(Icons.account_circle_rounded),
+        leading: IconButton(
+          icon: Icon(Icons.account_circle_rounded),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ProfilePage(username: username);
+            }));
+          },
+        ),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
