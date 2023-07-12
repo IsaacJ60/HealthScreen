@@ -28,7 +28,9 @@ class _DashboardUIState extends State<DashboardUI> {
 
   void _onTabSelected(int index) {
     if (index == 1) {
-      Navigator.pushNamed(context, InsightsPage.routeName);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return InsightsPage();
+    }));
     } else {
       setState(() {
         _currentIndex = index;
