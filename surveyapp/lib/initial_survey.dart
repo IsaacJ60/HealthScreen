@@ -53,7 +53,17 @@ class _InitialSurveyState extends State<InitialSurvey> {
                       var questions = [
                         "",
                         "How old are you?",
-                        "What is your sex?"
+                        "What is your sex?",
+                        "What is your height (meters)?",
+                        "What is your weight (kilograms)?",
+                        "Are you sexually active?",
+                        "If you are sexually active, does your partner have an STI or history of STIs?",
+                        'Do you currently smoke?',
+                        'Do you have a family history of colon cancer?',
+                        'If you answered yes to the previous question, please enter the age that family member was diagnosed with colon cancer.',
+                        'Do you have a personal history of fractures?',
+                        'Are you premenopausal or postmenopausal?',
+                        'If you are postmenopausal, what was your age of menopause?'
                       ];
 
                       Map<String, dynamic> data = {};
@@ -71,6 +81,9 @@ class _InitialSurveyState extends State<InitialSurvey> {
 
                       Database.updateComplete(username);
                       Database.writeToDB(data, username);
+
+                      List<String> screenings = Database.getFutureScreenings(data);
+                      Database.addFutureScreenings(username, screenings);
 
                       //GO TO DASHBOARD
                       Navigator.push(context,
@@ -289,16 +302,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
             hint: 'Skip if this does not apply to you.',
           ),
         ),
-        QuestionStep(
-          title: 'Do you have a family history of colon cancer?',
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Yes', value: 'Yes'),
-              TextChoice(text: 'No', value: 'No'),
-              TextChoice(text: 'I don\'t know', value: 'I don\'t know'),
-            ],
-          ),
-        ),
+
         QuestionStep(
           title: 'Do you have a personal history of fractures?',
           answerFormat: const SingleChoiceAnswerFormat(

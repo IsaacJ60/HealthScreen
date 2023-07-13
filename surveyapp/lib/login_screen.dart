@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:surveyapp/initial_survey.dart';
@@ -53,8 +54,10 @@ class LoginScreen extends StatelessWidget {
       if (foundName != true) {
         return 'User not exists';
       }
-      bool emailSent =
-          sendEmailInBackground(name, "Insert the password here") as bool;
+      //convert to string
+      Future <String> pw = Database.getPassword(name);
+      String p = await pw;
+      bool emailSent = await sendEmailInBackground(name, p);
       if (emailSent) {
         return "Email sent";
       }
@@ -75,10 +78,16 @@ class LoginScreen extends StatelessWidget {
             return InitialSurvey(title: "random", username: name);
           }));
         } else {
-          //change to dashboard TO DO
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return DashboardUI(username: name);
-          }));
+          Database.setCompleteScreenings(name);
+          Database.setFutureScreenings(name);
+          Future.delayed(loginTime).then((_) {
+            //change to dashboard
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return DashboardUI(username: name);
+            }));
+          });
+
+          
         }
       },
     );
