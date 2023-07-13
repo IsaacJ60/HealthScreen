@@ -72,7 +72,7 @@ class _DashboardUIState extends State<DashboardUI> {
             ),
             const SizedBox(height: 16),
             Container(
-              height: 200,
+              height: 150,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: ScreeningItemsData.futureItems.length,
@@ -80,12 +80,16 @@ class _DashboardUIState extends State<DashboardUI> {
                   final item = ScreeningItemsData.futureItems[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ScreeningItem(item: item!, username: username),
+                    child: Container(
+                      width: 150, // Adjust the width to the desired size
+                      height: 100, // Adjust the height to the desired size
+                      child: ScreeningItem(item: item!, username: username),
+                    ),
                   );
                 },
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             const Text(
               'Completed Screening',
               style: TextStyle(
@@ -94,17 +98,19 @@ class _DashboardUIState extends State<DashboardUI> {
               ),
             ),
             SizedBox(height: 16),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: ScreeningItemsData.completedItems.length,
-              itemBuilder: (context, index) {
-                final item = ScreeningItemsData.completedItems[index];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ScreeningItem(item: item!, username: username),
-                );
-              },
+            Container(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: ScreeningItemsData.completedItems.length,
+                itemBuilder: (context, index) {
+                  final item = ScreeningItemsData.completedItems[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ScreeningItem(item: item!, username: username),
+                  );
+                },
+              ),
             ),
           ],
         ),

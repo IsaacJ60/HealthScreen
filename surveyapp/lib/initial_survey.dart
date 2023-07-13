@@ -52,6 +52,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
 
                       var questions = [
                         "",
+                        "What is your name?",
                         "How old are you?",
                         "What is your sex?",
                         "What is your height (meters)?",
@@ -227,6 +228,12 @@ class _InitialSurveyState extends State<InitialSurvey> {
           text: 'Please answer all questions to the best of your ability.',
           buttonText: 'Let\'s go!',
         ),
+        QuestionStep(
+          title: 'What is your name?',
+          answerFormat: const TextAnswerFormat(
+            hint: 'Please enter your name',
+          ),
+        ), // ADDED THIS LINE
         QuestionStep(
           title: 'How old are you?',
           answerFormat: const IntegerAnswerFormat(
