@@ -59,6 +59,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
                         "Are you sexually active?",
                         "If you are sexually active, does your partner have an STI or history of STIs?",
                         'Do you currently smoke?',
+                        'Do you have a family history of osteoporosis?',
                         'Do you have a family history of colon cancer?',
                         'If you answered yes to the previous question, please enter the age that family member was diagnosed with colon cancer.',
                         'Do you have a personal history of fractures?',
@@ -282,6 +283,16 @@ class _InitialSurveyState extends State<InitialSurvey> {
             textChoices: [
               TextChoice(text: 'Yes', value: 'Yes'),
               TextChoice(text: 'No', value: 'No'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'Do you have a family history of osteoporosis?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+              TextChoice(text: 'I don\'t know', value: 'I don\'t know'),
             ],
           ),
         ),
