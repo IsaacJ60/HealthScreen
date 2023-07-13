@@ -69,7 +69,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1025877417545',
     projectId: 'survey-test-52843',
     storageBucket: 'survey-test-52843.appspot.com',
-    iosClientId: '1025877417545-7tdhf74p4fkgk2k4587nnp6vhk849spo.apps.googleusercontent.com',
+    iosClientId:
+        '1025877417545-7tdhf74p4fkgk2k4587nnp6vhk849spo.apps.googleusercontent.com',
     iosBundleId: 'com.example.surveyapp',
   );
 }

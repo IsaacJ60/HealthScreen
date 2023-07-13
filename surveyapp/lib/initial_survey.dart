@@ -82,7 +82,8 @@ class _InitialSurveyState extends State<InitialSurvey> {
                       Database.updateComplete(username);
                       Database.writeToDB(data, username);
 
-                      List<String> screenings = Database.getFutureScreenings(data);
+                      List<String> screenings =
+                          Database.getFutureScreenings(data);
                       Database.addFutureScreenings(username, screenings);
 
                       //GO TO DASHBOARD
@@ -302,7 +303,6 @@ class _InitialSurveyState extends State<InitialSurvey> {
             hint: 'Skip if this does not apply to you.',
           ),
         ),
-
         QuestionStep(
           title: 'Do you have a personal history of fractures?',
           answerFormat: const SingleChoiceAnswerFormat(
