@@ -306,65 +306,126 @@ class Database {
   static List<String> getFutureScreenings(Map<String, dynamic> response) {
     List<String> ret = [];
 
-    // if (response['What is your sex?'] == 'Female'){
-    //   int age = response['How old are you?'];
-    //   if (response['Are you sexually active?'] == 'Yes'){
-    //     if (age < 24){
-    //       //screening for Chlamydia trachomatis and Neisseria gonorrhoeae every 1 year
-    //     }
-    //     else{
-    //       if (response['If you are sexually active, does your partner have an STI or history of STIs?'] == 'Yes'){
-    //         //screening for Chlamydia trachomatis and Neisseria gonorrhoeae every 1 year
-    //       }
-    //     }
-    //   }
+    if (response['What is your sex?'] == 'Female'){
+      int age = int.parse(response['How old are you?']);
+      if (response['Are you sexually active?'] == 'Yes'){
+        if (age < 24){
+          //screening for Chlamydia trachomatis and Neisseria gonorrhoeae every 1 year
+          ret.add('Chlamydia Trachomatis (Every 1 year)');
+          ret.add('Neisseria Gonorrhoeae (Every 1 year)');
+        }
+        else{
+          if (response['If you are sexually active, does your partner have an STI or history of STIs?'] == 'Yes'){
+            //screening for Chlamydia trachomatis and Neisseria gonorrhoeae every 1 year
+            ret.add('Chlamydia Trachomatis (Every 1 year)');
+            ret.add('Neisseria Gonorrhoeae (Every 1 year)');
+          }
+        }
+      }
 
-    //   if (age <= 20){
+      if (age <= 20){
+        //self breast exams every 1 month
+        ret.add('Self breast exams (Every 1 month)');
+      }
 
-    //   }
+      else if (21 <= age && age <= 29){
+        //Papanicolaou test with cytology every 3 years
+        ret.add('Papanicolaou test with cytology (Every 3 years)');
+      }
 
-    //   else if (21 <= age && age <= 29){
-    //     //Papanicolaou test with cytology every 3 years
-    //   }
+      else if (30 <= age && age <= 65){
+        //Papanicolaou test with cytology every 3 years
+        // Papanicolaou test with high risk testing with cytology every 5 years
+        ret.add('Papanicolaou test with cytology (Every 3 years)');
+        ret.add('Papanicolaou test high risk testing with cytology (Every 5 years)');
+      }
 
-    //   else if (30 <= age && age <= 65){
-    //     //Papanicolaou test with cytology every 3 years
-    //     // Papanicolaou test with high risk testing with cytology every 5 years
-    //   }
+      if (response['Do you have a family history of osteoporosis?'] == 'Yes'){
+        // Dexa scan every 2 years
+        ret.add('Dexa scan (Every 2 years)');
+      }
+      else{
+        if (age > 65){
+          // Dexa scan every 2 years
+        ret.add('Dexa scan (Every 2 years)');
+        }
+      }
 
-    // }
+      if (response['Do you have a family history of colon cancer?'] == 'Yes'){
+        int relativeAge = int.parse(response['If you answered yes to the previous question, please enter the age that family member was diagnosed with colon cancer.']);
+        if (relativeAge < 50){
+          //colonscopy every 5 years
+          ret.add("Colonoscopy (Every 5 years)");
+        }
+        else if (50 <= relativeAge && relativeAge <= 59){
+          if (age >= 40){
+            //colonscopy every 5 years
+          ret.add("Colonoscopy (Every 5 years)");
+          }
+        }
+        else if (60 <= relativeAge){
+          if (age >= 40){
+            //colonscopy every 10 years
+          ret.add("Colonoscopy (Every 10 years)");
+          }
+        }
+      }
 
-    // if (response['What is your sex?'] == 'Male'){
-    //   if (response['Do you have a family history of colon cancer?'] == 'Yes'){
-    //     int relativeAge = response['If you answered yes to the previous question, please enter the age that family member was diagnosed with colon cancer.'];
-    //     if (relativeAge < 50){
-    //       //colonoscopy every 5 years
-    //     }
-    //     else if (50 <= relativeAge && relativeAge <= 59){
-    //       if (response['How old are you?'] >= 40){
-    //         //colonoscopy every 5 years
-    //       }
-    //     }
-    //     else if (relativeAge >= 60){
-    //       if (response['How old are you?'] >= 45){
-    //         // Colonscopy every 10 years
-    //         // FOBT every 1 year
-    //         // FIT-DNA test every 3 years
-    //         // Flexible sigmoidoscopy every 5 years
-    //       }
-    //     }
-    //   }
-    // }
+      else{
+        if (age >= 45){
+          // Colonscopy every 10 years
+          // FOBT every 1 year
+          // FIT-DNA every 3 years
+          // Flexible sigmoidoscopy every 5 years
+          ret.add("Colonoscopy (Every 10 years)");
+          ret.add("FOBT (Every 1 years)");
+          ret.add("FIT-DNA (Every 3 years)");
+          ret.add("Flexible sigmoidoscopy (Every 5 years)");
+        }
+      }
+      
+
+    }
+
+    if (response['What is your sex?'] == 'Male'){
+      if (response['Do you have a family history of colon cancer?'] == 'Yes'){
+        int relativeAge = response['If you answered yes to the previous question, please enter the age that family member was diagnosed with colon cancer.'];
+        if (relativeAge < 50){
+          //colonoscopy every 5 years
+          ret.add("Colonoscopy (Every 5 years)");
+        }
+        else if (50 <= relativeAge && relativeAge <= 59){
+          if (response['How old are you?'] >= 40){
+            //colonoscopy every 5 years
+          ret.add("Colonoscopy (Every 5 years)");
+          }
+        }
+        else if (relativeAge >= 60){
+          if (response['How old are you?'] >= 45){
+            // Colonscopy every 10 years
+            // FOBT every 1 year
+            // FIT-DNA test every 3 years
+            // Flexible sigmoidoscopy every 5 years
+            ret.add("Colonoscopy (Every 10 years)");
+            ret.add("FOBT (Every 1 years)");
+            ret.add("FIT-DNA (Every 3 years)");
+            ret.add("Flexible sigmoidoscopy (Every 5 years)");
+          }
+        }
+      }
+    }
 
     return ret;
   }
 
   static void addFutureScreenings(String email, List<String> toAdd) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+    Map <String, List> data = {};
 
     for (String s in toAdd) {
-      firestore.collection('futureScreenings').add({s: []});
+      data[s] = [];
     }
+      firestore.collection('futureScreenings').doc(email).set(data);
   }
 
   static void writeToDB(dynamic data, dynamic name) async {

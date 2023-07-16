@@ -6,6 +6,7 @@ import 'package:flutter_survey/flutter_survey.dart';
 import 'package:survey_kit/survey_kit.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/database.dart';
+import 'package:surveyapp/screening_data.dart';
 
 class InitialSurvey extends StatefulWidget {
   static const routeName = '/initial_survey';
@@ -84,15 +85,20 @@ class _InitialSurveyState extends State<InitialSurvey> {
                       Database.updateComplete(username);
                       Database.writeToDB(data, username);
 
-                      List<String> screenings =
-                          Database.getFutureScreenings(data);
+                      List<String> screenings = Database.getFutureScreenings(data);
                       Database.addFutureScreenings(username, screenings);
+                      Database.setFutureScreenings(username);
+                      
+                      Future.delayed(const Duration(milliseconds: 5000)).then((_) {
+                        //change to dashboard
+                          Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return DashboardUI(username: username);
+                        }));
+                      });
 
                       //GO TO DASHBOARD
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return DashboardUI(username: username);
-                      }));
+                      
                     },
                     task: task,
                     showProgress: true,

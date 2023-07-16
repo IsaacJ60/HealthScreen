@@ -20,38 +20,63 @@ class ScreeningData {
 
 class ScreeningItemsData {
   static final Map<String, ScreeningData> data = {
-    'Flu': ScreeningData(
+    'Chlamydia Trachomatis (Every 1 year)': ScreeningData(
         icon: Icons.local_hospital,
-        name: 'Flu',
+        name: 'Chlamydia Trachomatis (Every 1 year)',
         color: Colors.green,
         notes: []),
-    'Heart Checkup': ScreeningData(
+    'Neisseria Gonorrhoeae (Every 1 year)': ScreeningData(
       icon: Icons.favorite,
-      name: 'Heart Checkup',
+      name: 'Neisseria Gonorrhoeae (Every 1 year)',
       color: Colors.red,
       notes: [],
     ),
-    'Eye Examination': ScreeningData(
+    'Self breast exams (Every 1 month)': ScreeningData(
       icon: Icons.favorite,
-      name: 'Eye Examination',
+      name: 'Self breast exams (Every 1 month)',
       color: Colors.orange,
       notes: [],
     ),
-    'Temperature Check': ScreeningData(
+    'Papanicolaou test with cytology (Every 3 years)': ScreeningData(
         icon: Icons.thermostat_outlined,
-        name: 'Temperature Check',
+        name: 'Papanicolaou test with cytology (Every 3 years)',
         color: Colors.yellow,
         notes: []),
-    'Blood Pressure': ScreeningData(
+    'Papanicolaou test high risk testing with cytology (Every 5 years)': ScreeningData(
         icon: Icons.reddit,
-        name: 'Blood Pressure',
+        name: 'Papanicolaou test high risk testing with cytology (Every 5 years)',
         color: Colors.red,
         notes: []),
-    'COVID-19 Test': ScreeningData(
+    'Dexa scan (Every 2 years)': ScreeningData(
         icon: Icons.flutter_dash,
-        name: 'COVID-19 Test',
+        name: 'Dexa scan (Every 2 years)',
         color: Colors.purple,
         notes: []),
+    "Colonoscopy (Every 5 years)": ScreeningData(
+        icon: Icons.flutter_dash,
+        name: "Colonoscopy (Every 5 years)",
+        color: Colors.purple,
+        notes: []),
+    "Colonoscopy (Every 10 years)": ScreeningData(
+        icon: Icons.flutter_dash,
+        name: "Colonoscopy (Every 10 years)",
+        color: Colors.purple,
+        notes: []),
+    "FOBT (Every 1 years)": ScreeningData(
+        icon: Icons.flutter_dash,
+        name: "FOBT (Every 1 years)",
+        color: Colors.purple,
+        notes: []),
+    "FIT-DNA (Every 3 years)": ScreeningData(
+        icon: Icons.flutter_dash,
+        name: "FIT-DNA (Every 3 years)",
+        color: Colors.purple,
+        notes: []),
+    "Flexible sigmoidoscopy (Every 5 years)": ScreeningData(
+        icon: Icons.flutter_dash,
+        name: "Flexible sigmoidoscopy (Every 5 years)",
+        color: Colors.purple,
+        notes: [])
   };
   static List<ScreeningData?> futureItems = [];
 
