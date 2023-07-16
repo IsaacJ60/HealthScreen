@@ -6,6 +6,7 @@ import 'package:flutter_survey/flutter_survey.dart';
 import 'package:survey_kit/survey_kit.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/database.dart';
+import 'package:surveyapp/screening_data.dart';
 
 class InitialSurvey extends StatefulWidget {
   static const routeName = '/initial_survey';
@@ -52,6 +53,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
 
                       var questions = [
                         "",
+                        "What is your name?",
                         "How old are you?",
                         "What is your sex?",
                         "What is your height (meters)?",
@@ -59,6 +61,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
                         "Are you sexually active?",
                         "If you are sexually active, does your partner have an STI or history of STIs?",
                         'Do you currently smoke?',
+                        'Do you have a family history of osteoporosis?',
                         'Do you have a family history of colon cancer?',
                         'If you answered yes to the previous question, please enter the age that family member was diagnosed with colon cancer.',
                         'Do you have a personal history of fractures?',
@@ -82,15 +85,20 @@ class _InitialSurveyState extends State<InitialSurvey> {
                       Database.updateComplete(username);
                       Database.writeToDB(data, username);
 
-                      List<String> screenings =
-                          Database.getFutureScreenings(data);
+                      List<String> screenings = Database.getFutureScreenings(data);
                       Database.addFutureScreenings(username, screenings);
+                      Database.setFutureScreenings(username);
+                      
+                      Future.delayed(const Duration(milliseconds: 5000)).then((_) {
+                        //change to dashboard
+                          Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return DashboardUI(username: username);
+                        }));
+                      });
 
                       //GO TO DASHBOARD
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return DashboardUI(username: username);
-                      }));
+                      
                     },
                     task: task,
                     showProgress: true,
@@ -227,6 +235,12 @@ class _InitialSurveyState extends State<InitialSurvey> {
           buttonText: 'Let\'s go!',
         ),
         QuestionStep(
+          title: 'What is your name?',
+          answerFormat: const TextAnswerFormat(
+            hint: 'Please enter your name',
+          ),
+        ), // ADDED THIS LINE
+        QuestionStep(
           title: 'How old are you?',
           answerFormat: const IntegerAnswerFormat(
             hint: 'Please enter your age',
@@ -282,6 +296,16 @@ class _InitialSurveyState extends State<InitialSurvey> {
             textChoices: [
               TextChoice(text: 'Yes', value: 'Yes'),
               TextChoice(text: 'No', value: 'No'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'Do you have a family history of osteoporosis?',
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+              TextChoice(text: 'I don\'t know', value: 'I don\'t know'),
             ],
           ),
         ),

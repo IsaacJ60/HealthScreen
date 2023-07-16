@@ -28,28 +28,28 @@ class InsightItemsData {
   static List<InsightItem> items = [
     InsightItem(
       name: 'Case study in alabama',
-      imagePath: 'assets/boxCover.jpg',
+      imagePath: 'boxCover.jpg',
       headerID: 1,
       articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
       gifPaths: ["download.gif", "assets/piku.gif"],
     ),
     InsightItem(
       name: 'Case study in mexico',
-      imagePath: 'assets/boxCover2.jpeg',
+      imagePath: 'boxCover2.jpeg',
       headerID: 2,
       articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
       gifPaths: ["assets/rdownload.gif", "assets/piku.gif"],
     ),
     InsightItem(
       name: 'hmmm',
-      imagePath: 'assets/boxCover3.jpeg',
+      imagePath: 'boxCover3.jpeg',
       headerID: 3,
       articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
       gifPaths: ["assets/download.gif", "assets/piku.gif"],
     ),
     InsightItem(
       name: 'bruh',
-      imagePath: 'assets/boxCover3.jpeg',
+      imagePath: 'boxCover3.jpeg',
       headerID: 3,
       articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
       gifPaths: ["assets/download.gif", "assets/piku.gif"],
