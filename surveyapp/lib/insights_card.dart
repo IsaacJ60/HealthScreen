@@ -18,7 +18,6 @@ class InsightsCard extends StatefulWidget {
 
 class _InsightsCardState extends State<InsightsCard> {
   int currentIndex = 0;
-  DateTime? _lastTap;
 
   void _showNextArticle() {
     if (currentIndex < widget.articleText.length - 1) {
@@ -38,6 +37,8 @@ class _InsightsCardState extends State<InsightsCard> {
 
   @override
   Widget build(BuildContext context) {
+    double progress = (currentIndex) / widget.articleText.length;
+
     return GestureDetector(
       child: Scaffold(
         appBar: AppBar(
@@ -64,6 +65,14 @@ class _InsightsCardState extends State<InsightsCard> {
                 width: 200,
                 // fit: BoxFit.contain,
               ),
+            ),
+            SizedBox(height: 16.0),
+            SizedBox(height: 16.0),
+            LinearProgressIndicator(
+              value: progress,
+              minHeight: 10,
+              backgroundColor: Colors.grey,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
             ),
             SizedBox(height: 16.0),
             Row(

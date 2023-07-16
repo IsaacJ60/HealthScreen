@@ -38,21 +38,21 @@ class InsightItemsData {
       imagePath: 'boxCover2.jpeg',
       headerID: 2,
       articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
-      gifPaths: ["assets/rdownload.gif", "assets/piku.gif"],
+      gifPaths: ["download.gif", "piku.gif"],
     ),
     InsightItem(
       name: 'hmmm',
       imagePath: 'boxCover3.jpeg',
       headerID: 3,
       articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
-      gifPaths: ["assets/download.gif", "assets/piku.gif"],
+      gifPaths: ["download.gif", "piku.gif"],
     ),
     InsightItem(
       name: 'bruh',
       imagePath: 'boxCover3.jpeg',
       headerID: 3,
       articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
-      gifPaths: ["assets/download.gif", "assets/piku.gif"],
+      gifPaths: ["download.gif", "piku.gif"],
     )
   ];
   /*
