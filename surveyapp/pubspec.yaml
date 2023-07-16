@@ -68,6 +68,7 @@ flutter:
     - assets/boxCover2.jpeg
     - assets/boxCover3.jpeg
     - assets/download.gif
+    - assets/piku.gif
 
   # To add assets to your application, add an assets section, like this:
   # assets:

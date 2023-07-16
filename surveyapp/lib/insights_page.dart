@@ -58,7 +58,9 @@ class InsightsPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => InsightsCard(
-                    insightItem: item,
+                    title: item.name,
+                    articleText: item.articleTexts,
+                    gifPaths: item.gifPaths,
                   ),
                 ),
               );
@@ -66,18 +68,14 @@ class InsightsPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                width: 150,
+                width: 200,
                 height: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image(
                       image: AssetImage(item.imagePath),
-                      height: 100,
-                      width: 100,
+                      fit: BoxFit.fill,
                     ),
                     const SizedBox(height: 8),
                     Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'insights_item.dart';
+import 'insights_card.dart';
 
 //import 'package:universal_html/html.dart' as html;
 
@@ -7,18 +8,20 @@ class InsightItem {
   final String name;
   final String imagePath;
   final int headerID;
-  final String articleText;
+  final List<String> articleTexts;
   final List<String> gifPaths;
+  // final List<InsightsCard> cardPages;
   // each box should have a list of gif paths and a txt.file
   //read txt.file and create a article text list
   // txt.file should
 
-  InsightItem(
-      {required this.name,
-      required this.imagePath,
-      required this.headerID,
-      required this.articleText,
-      required this.gifPaths});
+  InsightItem({
+    required this.name,
+    required this.imagePath,
+    required this.headerID,
+    required this.articleTexts,
+    required this.gifPaths,
+  });
 }
 
 class InsightItemsData {
@@ -27,29 +30,29 @@ class InsightItemsData {
       name: 'Case study in alabama',
       imagePath: 'assets/boxCover.jpg',
       headerID: 1,
-      articleText: 'djslkfjdlfjlkjsklfjf',
-      gifPaths: ["assets/download.gif"],
+      articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
+      gifPaths: ["download.gif", "assets/piku.gif"],
     ),
     InsightItem(
       name: 'Case study in mexico',
       imagePath: 'assets/boxCover2.jpeg',
       headerID: 2,
-      articleText: 'djslkfjdlfjlkjsklfjf',
-      gifPaths: ["assets/download.gif"],
+      articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
+      gifPaths: ["assets/rdownload.gif", "assets/piku.gif"],
     ),
     InsightItem(
       name: 'hmmm',
       imagePath: 'assets/boxCover3.jpeg',
       headerID: 3,
-      articleText: 'djslkfjdlfjlkjsklfjf',
-      gifPaths: ["assets/download.gif"],
+      articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
+      gifPaths: ["assets/download.gif", "assets/piku.gif"],
     ),
     InsightItem(
       name: 'bruh',
       imagePath: 'assets/boxCover3.jpeg',
       headerID: 3,
-      articleText: 'djslkfjdlfjlkjsklfjf',
-      gifPaths: ["assets/download.gif"],
+      articleTexts: ['djslkfjdlfjlkjsklfjf', 'jdfhskjfhkjh'],
+      gifPaths: ["assets/download.gif", "assets/piku.gif"],
     )
   ];
   /*
