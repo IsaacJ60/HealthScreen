@@ -93,7 +93,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
                         //change to dashboard
                           Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return DashboardUI(username: username);
+                          return DashboardUI(username: username, name: data['What is your name?']);
                         }));
                       });
 
