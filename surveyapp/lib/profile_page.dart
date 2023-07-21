@@ -5,9 +5,11 @@ import 'package:surveyapp/database.dart';
 class ProfilePage extends StatefulWidget {
   static const routeName = "/profile";
 
-  const ProfilePage({Key? key, required this.username}) : super(key: key);
+  const ProfilePage({Key? key, required this.username, required this.name})
+      : super(key: key);
 
   final String username;
+  final String name;
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -23,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     email = widget.username;
+    name = widget.name;
   }
 
   @override

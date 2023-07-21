@@ -477,4 +477,13 @@ class Database {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     await firestore.collection('first-survey').doc(name).set(data);
   }
+
+  static Future<String> getName(String email) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    DocumentSnapshot documentSnapshot = await firestore.collection('first-survey').doc(email).get();
+    if (documentSnapshot.exists){
+      return documentSnapshot['What is your name?'];
+    }
+    return '';
+  }
 }

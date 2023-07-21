@@ -9,9 +9,10 @@ import 'insights_card.dart';
 class DashboardUI extends StatefulWidget {
   static const routeName = "/dash";
 
-  const DashboardUI({Key? key, required this.username}) : super(key: key);
+  DashboardUI({Key? key, required this.username, required this.name}) : super(key: key);
 
   final String username;
+  final String name;
 
   @override
   _DashboardUIState createState() => _DashboardUIState();
@@ -19,12 +20,14 @@ class DashboardUI extends StatefulWidget {
 
 class _DashboardUIState extends State<DashboardUI> {
   late String username;
+  late String title;
   int _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
     username = widget.username;
+    title = widget.name;
   }
 
   void _onTabSelected(int index) {
@@ -47,13 +50,13 @@ class _DashboardUIState extends State<DashboardUI> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text(username),
+          child: Text(title),
         ),
         leading: IconButton(
           icon: Icon(Icons.account_circle_rounded),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProfilePage(username: username);
+              return ProfilePage(username: username, name: title);
             }));
           },
         ),

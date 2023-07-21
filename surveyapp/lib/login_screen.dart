@@ -80,10 +80,11 @@ class LoginScreen extends StatelessWidget {
         } else {
           Database.setCompleteScreenings(name);
           Database.setFutureScreenings(name);
-          Future.delayed(loginTime).then((_) {
+          Future.delayed(loginTime).then((_) async {
             //change to dashboard
+            String realName = await Database.getName(name);
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DashboardUI(username: name);
+              return DashboardUI(username: name, name: realName);
             }));
           });
 
