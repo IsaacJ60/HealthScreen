@@ -37,7 +37,7 @@ class _InsightsCardState extends State<InsightsCard> {
 
   @override
   Widget build(BuildContext context) {
-    double progress = (currentIndex) / widget.articleText.length;
+    double progress = (currentIndex + 1) / widget.articleText.length;
 
     return GestureDetector(
       child: Scaffold(

@@ -51,7 +51,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildSection(String headerText) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 4.0, right: 16.0),
+      padding: const EdgeInsets.only(
+          left: 16.0, top: 16.0, bottom: 4.0, right: 16.0),
       child: Text(
         headerText,
         style: const TextStyle(
@@ -107,10 +108,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildHelpButton() {
     Map<String, String> helpTexts = Map<String, String>();
+    String faqText1 =
+        "Q: How do I change the password in my HealthScreen account? \n A:To change the password to a registered account, follow the steps: \n 1. Open Health Screen -> Go to Profile Page by clicking account icon at top left on the dashboard page -> press logout \n Sign back into Health Screen and press forget password to reset your password";
+
     helpTexts["Help"] = "Select a help option";
-    helpTexts["FAQ"] = "FAQ"; // TODO: Add FAQ
-    helpTexts["Getting Started"] = "Getting Started"; // TODO: Add Getting Started
-    helpTexts["Privacy and Security"] = "Privacy and Security"; // TODO: Add Privacy and Security
+    helpTexts["FAQ"] = faqText1; // TODO: Add FAQ
+    helpTexts["Getting Started"] =
+        "Getting Started"; // TODO: Add Getting Started
+    helpTexts["Privacy and Security"] =
+        "Privacy and Security"; // TODO: Add Privacy and Security
 
     String helpText = helpTexts[selectedOption]!;
 
@@ -118,34 +124,31 @@ class _ProfilePageState extends State<ProfilePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, bottom: 16.0, right: 16.0),
-          child: DropdownButton<String>(
-            value: selectedOption,
-            items: const [
-              DropdownMenuItem(
-                value: "Help", 
-                child: Text("Help")
-              ),
-              DropdownMenuItem(
-                value: 'FAQ',
-                child: Text('FAQ'),
-              ),
-              DropdownMenuItem(
-                value: 'Getting Started',
-                child: Text('Getting Started'),
-              ),
-              DropdownMenuItem(
-                value: 'Privacy and Security',
-                child: Text('Privacy and Security'),
-              ),
-            ],
-            onChanged: (String? newValue) {
-              setState(() {
-                selectedOption = newValue!;
-              });
-            },
-          )
-        ),
+            padding:
+                const EdgeInsets.only(left: 16.0, bottom: 16.0, right: 16.0),
+            child: DropdownButton<String>(
+              value: selectedOption,
+              items: const [
+                DropdownMenuItem(value: "Help", child: Text("Help")),
+                DropdownMenuItem(
+                  value: 'FAQ',
+                  child: Text('FAQ'),
+                ),
+                DropdownMenuItem(
+                  value: 'Getting Started',
+                  child: Text('Getting Started'),
+                ),
+                DropdownMenuItem(
+                  value: 'Privacy and Security',
+                  child: Text('Privacy and Security'),
+                ),
+              ],
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedOption = newValue!;
+                });
+              },
+            )),
         Padding(
           padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
           child: Text(

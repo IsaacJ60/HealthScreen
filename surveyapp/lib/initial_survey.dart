@@ -85,20 +85,21 @@ class _InitialSurveyState extends State<InitialSurvey> {
                       Database.updateComplete(username);
                       Database.writeToDB(data, username);
 
-                      List<String> screenings = Database.getFutureScreenings(data);
+                      List<String> screenings =
+                          Database.getFutureScreenings(data);
                       Database.addFutureScreenings(username, screenings);
                       Database.setFutureScreenings(username);
-                      
-                      Future.delayed(const Duration(milliseconds: 5000)).then((_) {
+
+                      Future.delayed(const Duration(milliseconds: 5000))
+                          .then((_) {
                         //change to dashboard
-                          Navigator.push(context,
+                        Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return DashboardUI(username: username);
                         }));
                       });
 
                       //GO TO DASHBOARD
-                      
                     },
                     task: task,
                     showProgress: true,
@@ -355,6 +356,44 @@ class _InitialSurveyState extends State<InitialSurvey> {
             hint: 'Skip if this does not apply to you.',
           ),
         ),
+        QuestionStep(
+            title:
+                'When was your last screening for chlamydia trachomatis (mm/dd/yyyy)',
+            isOptional: true,
+            answerFormat:
+                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
+        QuestionStep(
+            title:
+                'When was your last screening for Neisseria gonorrhoeae (mm/dd/yyyy)',
+            isOptional: true,
+            answerFormat:
+                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
+        QuestionStep(
+            title:
+                'When was your last Papanicolaou test with cytology (mm/dd/yyyy)',
+            isOptional: true,
+            answerFormat:
+                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
+        QuestionStep(
+            title: 'When was your last Dexa scan (mm/dd/yyyy)',
+            isOptional: true,
+            answerFormat:
+                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
+        QuestionStep(
+            title: 'When was your last colonoscopy (mm/dd/yyyy)',
+            isOptional: true,
+            answerFormat:
+                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
+        QuestionStep(
+            title: 'When was your last Flexible sigmoidoscopy (mm/dd/yyyy)',
+            isOptional: true,
+            answerFormat:
+                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
+        QuestionStep(
+            title: 'When was your last FIT-DNA test (mm/dd/yyyy)',
+            isOptional: true,
+            answerFormat:
+                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '321'),
           text: 'Thanks for answering',
