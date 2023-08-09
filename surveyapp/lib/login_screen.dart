@@ -5,6 +5,7 @@ import 'package:surveyapp/initial_survey.dart';
 import 'package:surveyapp/database.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/email_sender.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -69,6 +70,12 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterLogin(
       title: 'HealthScreen',
+      // title: 'HEALTHSCREEN',
+      theme: LoginTheme(
+        titleStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       onLogin: _authUser,
       onSignup: _signupUser,
       onRecoverPassword: _recoverPassword,
