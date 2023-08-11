@@ -6,6 +6,7 @@ import 'package:surveyapp/database.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/email_sender.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:surveyapp/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -56,7 +57,7 @@ class LoginScreen extends StatelessWidget {
         return 'User not exists';
       }
       //convert to string
-      Future <String> pw = Database.getPassword(name);
+      Future<String> pw = Database.getPassword(name);
       String p = await pw;
       bool emailSent = await sendEmailInBackground(name, p);
       if (emailSent) {
@@ -74,6 +75,46 @@ class LoginScreen extends StatelessWidget {
       theme: LoginTheme(
         titleStyle: const TextStyle(
           fontWeight: FontWeight.bold,
+        ),
+        bodyStyle: const TextStyle(
+          color: Colors.black,
+        ),
+        textFieldStyle: const TextStyle(
+          color: Colors.black,
+        ),
+        buttonStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+        cardTheme: CardTheme(
+          elevation: 5,
+          margin: const EdgeInsets.only(top: 15),
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+        ),
+        inputTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: const EdgeInsets.all(15),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(100),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(100),
+            borderSide: BorderSide(color: Colors.black),
+          ),
+        ),
+        buttonTheme: LoginButtonTheme(
+          splashColor: Colors.black,
+          backgroundColor: AppColors.primaryColor,
+          highlightColor: Colors.black,
+          elevation: 9.0,
+          highlightElevation: 6.0,
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
         ),
       ),
       onLogin: _authUser,
@@ -94,8 +135,6 @@ class LoginScreen extends StatelessWidget {
               return DashboardUI(username: name, name: realName);
             }));
           });
-
-          
         }
       },
     );

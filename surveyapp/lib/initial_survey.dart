@@ -7,6 +7,7 @@ import 'package:survey_kit/survey_kit.dart';
 import 'package:surveyapp/dashboard_ui.dart';
 import 'package:surveyapp/database.dart';
 import 'package:surveyapp/screening_data.dart';
+import 'package:surveyapp/app_colors.dart';
 
 class InitialSurvey extends StatefulWidget {
   static const routeName = '/initial_survey';
@@ -95,7 +96,9 @@ class _InitialSurveyState extends State<InitialSurvey> {
                         //change to dashboard
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return DashboardUI(username: username, name: data['What is your name?']);
+                          return DashboardUI(
+                              username: username,
+                              name: data['What is your name?']);
                         }));
                       });
 
@@ -108,26 +111,26 @@ class _InitialSurveyState extends State<InitialSurvey> {
                       'next': 'Next',
                     },
                     themeData: Theme.of(context).copyWith(
-                      primaryColor: Colors.cyan,
+                      primaryColor: AppColors.primaryColor,
                       appBarTheme: const AppBarTheme(
                         color: Colors.white,
                         iconTheme: IconThemeData(
-                          color: Colors.cyan,
+                          color: AppColors.primaryColor,
                         ),
                         titleTextStyle: TextStyle(
-                          color: Colors.cyan,
+                          color: AppColors.primaryColor,
                         ),
                       ),
                       iconTheme: const IconThemeData(
-                        color: Colors.cyan,
+                        color: AppColors.primaryColor,
                       ),
                       textSelectionTheme: const TextSelectionThemeData(
-                        cursorColor: Colors.cyan,
-                        selectionColor: Colors.cyan,
-                        selectionHandleColor: Colors.cyan,
+                        cursorColor: AppColors.primaryColor,
+                        selectionColor: AppColors.primaryColor,
+                        selectionHandleColor: AppColors.primaryColor,
                       ),
                       cupertinoOverrideTheme: const CupertinoThemeData(
-                        primaryColor: Colors.cyan,
+                        primaryColor: AppColors.primaryColor,
                       ),
                       outlinedButtonTheme: OutlinedButtonThemeData(
                         style: ButtonStyle(
@@ -142,7 +145,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
                                 );
                               }
                               return const BorderSide(
-                                color: Colors.cyan,
+                                color: AppColors.primaryColor,
                               );
                             },
                           ),
@@ -165,7 +168,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
                                   .textTheme
                                   .labelLarge
                                   ?.copyWith(
-                                    color: Colors.cyan,
+                                    color: AppColors.primaryColor,
                                   );
                             },
                           ),
@@ -175,7 +178,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
                         style: ButtonStyle(
                           textStyle: MaterialStateProperty.all(
                             Theme.of(context).textTheme.labelLarge?.copyWith(
-                                  color: Colors.cyan,
+                                  color: AppColors.primaryColor,
                                 ),
                           ),
                         ),
@@ -204,7 +207,7 @@ class _InitialSurveyState extends State<InitialSurvey> {
                         ),
                       ),
                       colorScheme: ColorScheme.fromSwatch(
-                        primarySwatch: Colors.cyan,
+                        primarySwatch: Colors.blueGrey,
                       )
                           .copyWith(
                             onPrimary: Colors.white,

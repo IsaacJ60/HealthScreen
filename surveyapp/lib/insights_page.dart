@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'insights_item.dart';
 import 'insights_card.dart';
+import 'app_colors.dart';
 
 class InsightsPage extends StatelessWidget {
   static const routeName = "/insights";
@@ -10,7 +11,7 @@ class InsightsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Insights"),
-        backgroundColor: Colors.blue,
+        backgroundColor: AppColors.primaryColor,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

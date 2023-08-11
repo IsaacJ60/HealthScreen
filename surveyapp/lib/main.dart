@@ -29,6 +29,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Survey Demo',
       theme: ThemeData(
+        primaryColor: AppColors.primaryColor,
+        secondaryHeaderColor: AppColors.accentColor,
+        indicatorColor: AppColors.accentColor,
+        scaffoldBackgroundColor: AppColors.backgroundColor,
         colorScheme: const ColorScheme.light(
           primary: AppColors.primaryColor,
           secondary: AppColors.secondaryColor,

@@ -5,11 +5,13 @@ import 'screening_item.dart';
 import 'database.dart';
 import 'insights_page.dart';
 import 'insights_card.dart';
+import 'app_colors.dart';
 
 class DashboardUI extends StatefulWidget {
   static const routeName = "/dash";
 
-  DashboardUI({Key? key, required this.username, required this.name}) : super(key: key);
+  DashboardUI({Key? key, required this.username, required this.name})
+      : super(key: key);
 
   final String username;
   final String name;
@@ -60,7 +62,7 @@ class _DashboardUIState extends State<DashboardUI> {
             }));
           },
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
         child: Column(
