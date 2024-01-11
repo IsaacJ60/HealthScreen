@@ -359,44 +359,6 @@ class _InitialSurveyState extends State<InitialSurvey> {
             hint: 'Skip if this does not apply to you.',
           ),
         ),
-        QuestionStep(
-            title:
-                'When was your last screening for chlamydia trachomatis (mm/dd/yyyy)',
-            isOptional: true,
-            answerFormat:
-                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
-        QuestionStep(
-            title:
-                'When was your last screening for Neisseria gonorrhoeae (mm/dd/yyyy)',
-            isOptional: true,
-            answerFormat:
-                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
-        QuestionStep(
-            title:
-                'When was your last Papanicolaou test with cytology (mm/dd/yyyy)',
-            isOptional: true,
-            answerFormat:
-                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
-        QuestionStep(
-            title: 'When was your last Dexa scan (mm/dd/yyyy)',
-            isOptional: true,
-            answerFormat:
-                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
-        QuestionStep(
-            title: 'When was your last colonoscopy (mm/dd/yyyy)',
-            isOptional: true,
-            answerFormat:
-                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
-        QuestionStep(
-            title: 'When was your last Flexible sigmoidoscopy (mm/dd/yyyy)',
-            isOptional: true,
-            answerFormat:
-                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
-        QuestionStep(
-            title: 'When was your last FIT-DNA test (mm/dd/yyyy)',
-            isOptional: true,
-            answerFormat:
-                TextAnswerFormat(hint: 'Skip if this does not apply to you.')),
         CompletionStep(
           stepIdentifier: StepIdentifier(id: '321'),
           text: 'Thanks for answering',

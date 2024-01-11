@@ -299,19 +299,6 @@ class Database {
     }
   }
 
-  static List<int> dateToList(String date) {
-    List<String> dateParts = date.split('/');
-    int month = int.parse(dateParts[0]);
-    int day = int.parse(dateParts[1]);
-    int year = int.parse(dateParts[2]);
-
-    return [year, month, day];
-  }
-
-  static String FormatDate() {
-    return "";
-  }
-
   static void addNotes(String email, String screeningName, String note) {
     addFutureNote(email, screeningName, note);
     addCompleteNote(email, screeningName, note);
@@ -319,52 +306,11 @@ class Database {
 
   static List<String> getFutureScreenings(Map<String, dynamic> response) {
     List<String> ret = [];
-    /*
-    DateTime now = DateTime.now();
-    DateTime ctNewTime = DateTime(
-        now.year + 1, now.month, now.day, now.hour, now.minute, now.second);
-   DateTime ngNewTime = DateTime(
-        now.year + 1, now.month, now.day, now.hour, now.minute, now.second);
-        */
 
     if (response['What is your sex?'] == 'Female') {
       int age = int.parse(response['How old are you?']);
       if (response['Are you sexually active?'] == 'Yes') {
         if (age < 24) {
-          /* if (response[
-                  'When was your last screening for chlamydia trachomatis (mm/dd/yyyy)'] !=
-              null) {
-            String ctTime = response[
-                'When was your last screening for chlamydia trachomatis (mm/dd/yyyy)'];
-            List<int> ctDateList = dateToList(ctTime);
-
-            DateTime ctNewTime = DateTime(
-                ctDateList[0],
-                now.month + ctDateList[0],
-                now.day + ctDateList[1],
-                now.hour,
-                now.minute,
-                now.second);
-          }
-           if (response[
-                  'When was your last screening for chlamydia trachomatis (mm/dd/yyyy)'] !=
-              null) {
-            String ngTime = response[
-                'When was your last screening for Neisseria gonorrhoeae (mm/dd/yyyy)'];
-            List<int> ngDateList = dateToList(ngTime);
-
-            DateTime ngNewTime = DateTime(
-                ngDateList[0] + 1,
-                ngDateList[1] ,
-                ngDateList[2]  ,
-                now.hour,
-                now.minute,
-                now.second);
-          }
-          DateFormat formatter = DateFormat('mm/dd/yyyy');
-          String formattedDate = formatter.format(ctNewTime);
-          */
-          //screening for Chlamydia trachomatis and Neisseria gonorrhoeae every 1 year
           ret.add('Chlamydia Trachomatis (Every 1 year)');
           ret.add('Neisseria Gonorrhoeae (Every 1 year)');
         } else {
@@ -480,8 +426,9 @@ class Database {
 
   static Future<String> getName(String email) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    DocumentSnapshot documentSnapshot = await firestore.collection('first-survey').doc(email).get();
-    if (documentSnapshot.exists){
+    DocumentSnapshot documentSnapshot =
+        await firestore.collection('first-survey').doc(email).get();
+    if (documentSnapshot.exists) {
       return documentSnapshot['What is your name?'];
     }
     return '';

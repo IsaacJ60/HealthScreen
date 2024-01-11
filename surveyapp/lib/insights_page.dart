@@ -16,14 +16,10 @@ class InsightsPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          _buildSection("Screenings are cool!"),
+          _buildSection("Importance of Screenings"),
           _buildBoxesRow(1),
-          _buildSection("Do your screenings"),
-          _buildBoxesRow(1),
-          _buildSection("Screenings"),
+          _buildSection("General Health Information"),
           _buildBoxesRow(2),
-          _buildSection("Screen"),
-          _buildBoxesRow(3),
         ],
       ),
     );

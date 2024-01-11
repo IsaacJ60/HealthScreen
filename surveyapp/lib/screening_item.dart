@@ -39,7 +39,7 @@ class ScreeningItem extends StatelessWidget {
             Text(
               item.name,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

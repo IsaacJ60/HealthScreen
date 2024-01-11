@@ -66,6 +66,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/boxCover.jpg
+    - assets/screening1.jpeg
+    - assets/general1.png
     - assets/boxCover2.jpeg
     - assets/boxCover3.jpeg
     - assets/download.gif

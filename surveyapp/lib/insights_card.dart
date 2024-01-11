@@ -53,17 +53,9 @@ class _InsightsCardState extends State<InsightsCard> {
               child: Text(
                 widget.articleText[currentIndex],
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-            ),
-            Center(
-              child: Image.asset(
-                widget.gifPaths[currentIndex],
-                height: 200,
-                width: 200,
-                // fit: BoxFit.contain,
               ),
             ),
             SizedBox(height: 16.0),

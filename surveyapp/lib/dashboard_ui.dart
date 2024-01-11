@@ -87,7 +87,7 @@ class _DashboardUIState extends State<DashboardUI> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       width: 150, // Adjust the width to the desired size
-                      height: 100, // Adjust the height to the desired size
+                      height: 150, // Adjust the height to the desired size
                       child: ScreeningItem(item: item!, username: username),
                     ),
                   );
